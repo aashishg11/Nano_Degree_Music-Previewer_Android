@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Spotify Streamer</string>
+    <string name="edittext_artist">Enter name</string>
+    <string name="action_settings">Settings</string>
+    <string name="textview_artist">Name of the artist</string>
+    <string name="title_activity_top_tracks">TopTracks</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="textview_song">Name of song</string>
+    <string name="textview_album">Name of album</string>
+    <string name="title_activity_playback_screen">PlaybackScreen</string>
+    <string name="playback_artist">Coldplay</string>
+    <string name="playback_song">A sky full of tears</string>
+    <string name="playback_album">Ghost stories</string>
+    <string name="playback_current_time">0:00</string>
+    <string name="playback_max_time">4:38</string>
+
+</resources>
