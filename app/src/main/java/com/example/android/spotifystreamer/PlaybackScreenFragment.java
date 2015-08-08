@@ -131,10 +131,21 @@ public class PlaybackScreenFragment extends DialogFragment {
     }
 
     private void pauseSong() {
-        
+        togglePlayPause();
     }
 
     private void playSong() {
+        togglePlayPause();
+    }
+
+    private void togglePlayPause() {
+        if(playBT.getVisibility() == View.VISIBLE){
+            playBT.setVisibility(View.GONE);
+            pauseBT.setVisibility(View.VISIBLE);
+        }else {
+            pauseBT.setVisibility(View.GONE);
+            playBT.setVisibility(View.VISIBLE);
+        }
     }
 
     private void nextSong() {
