@@ -43,7 +43,7 @@ String artistName;
     static final String ARTIST_ID = "ID";
     static final String ARTISTNAME = "NAME";
     // Arraylist to store track information
-    ArrayList<TopTrackInfo> allTracks = new ArrayList<TopTrackInfo>();
+    public static ArrayList<TopTrackInfo> allTracks = new ArrayList<>();
     ListView listView;
     TracksToMainCommunicatior communicatior;
     //TopTracksToMainComm topTracksToMainComm;
@@ -102,7 +102,8 @@ String artistName;
                         String image = allTracks.get(position).imageUrl_large;
                         String songName = allTracks.get(position).trackName;
                         String albumName = allTracks.get(position).albumName;
-                        communicatior.respondToSong(url,image,songName,albumName,artistName);
+                        int pos = position;
+                        communicatior.respondToSong(url,image,songName,albumName,artistName,pos);
                     }
                 });
 
@@ -116,7 +117,7 @@ String artistName;
 
     public interface TracksToMainCommunicatior{
 
-        public void respondToSong(String url,String image,String songName,String albumName,String artistName);
+        public void respondToSong(String url,String image,String songName,String albumName,String artistName,int pos);
 
     }
 

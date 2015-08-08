@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.spotifystreamer" >
+    package="com.example.android.spotifystreamer">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,12 +8,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboard"
             android:label="@string/app_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +24,7 @@
             android:name=".TopTracksActivity"
             android:label="@string/title_activity_top_tracks"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.spotifystreamer.MainActivity" />
@@ -33,11 +33,17 @@
             android:name=".PlaybackScreenActivity"
             android:label="@string/title_activity_playback_screen"
             android:launchMode="singleTop"
-            android:parentActivityName=".TopTracksActivity" >
+            android:parentActivityName=".TopTracksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.spotifystreamer.TopTracksActivity" />
+
         </activity>
+
+        <service
+            android:name="com.example.android.spotifystreamer.PlaybackService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>

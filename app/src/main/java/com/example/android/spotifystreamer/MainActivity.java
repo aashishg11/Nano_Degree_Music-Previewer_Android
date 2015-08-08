@@ -97,7 +97,7 @@ public class MainActivity extends ActionBarActivity implements ArtistsFragment.A
 
 
     @Override
-    public void respondToSong(String url, String image, String songName, String albumName,String artistName) {
+    public void respondToSong(String url, String image, String songName, String albumName,String artistName,int pos) {
 
         if (mtwopane) {
 
@@ -107,6 +107,7 @@ public class MainActivity extends ActionBarActivity implements ArtistsFragment.A
             args.putString(PlaybackScreenFragment.SONG_NAME, songName);
             args.putString(PlaybackScreenFragment.ALBUM_NAME, albumName);
             args.putString(PlaybackScreenFragment.ARTIST_NAME,artistName);
+            args.putInt(PlaybackScreenFragment.TRACK_POSITION,pos);
             PlaybackScreenFragment fragment = new PlaybackScreenFragment();
             fragment.setArguments(args);
             FragmentManager manager = getFragmentManager();

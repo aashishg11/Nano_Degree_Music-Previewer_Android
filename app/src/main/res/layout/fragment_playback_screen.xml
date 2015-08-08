@@ -48,6 +48,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/button_previous_playback"
+                android:src="@android:drawable/ic_media_previous"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                />
+
+
+
+            <ImageButton
+                android:id="@+id/button_play_playback"
+                android:src="@android:drawable/ic_media_play"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_toRightOf="@id/button_previous_playback"
+                />
+
+            <ImageButton
+                android:id="@+id/button_next_playback"
+                android:src="@android:drawable/ic_media_next"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_toRightOf="@id/button_play_playback"
+
+                />
+
+
+
+            <ImageButton
+                android:id="@+id/button_pause_playback"
+                android:src="@android:drawable/ic_media_pause"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_toRightOf="@id/button_previous_playback"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

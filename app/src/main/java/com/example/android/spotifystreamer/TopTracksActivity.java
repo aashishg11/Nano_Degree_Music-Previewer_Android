@@ -77,14 +77,15 @@ TopTracksFragment.TracksToMainCommunicatior{
 
 
     @Override
-    public void respondToSong(String url,String image,String songName,String albumName,String artistName) {
+    public void respondToSong(String url,String image,String songName,String albumName,String artistName,int pos) {
 
         Intent playbackIntent = new Intent(this, PlaybackScreenActivity.class)
                 .putExtra(PlaybackScreenActivity.SONG_URL, url)
                 .putExtra(PlaybackScreenActivity.IMAGE_URL,image)
                 .putExtra(PlaybackScreenActivity.SONG_NAME,songName)
                 .putExtra(PlaybackScreenActivity.ALBUM_NAME,albumName)
-                .putExtra(PlaybackScreenFragment.ARTIST_NAME,artistName);
+                .putExtra(PlaybackScreenFragment.ARTIST_NAME,artistName)
+                .putExtra(PlaybackScreenFragment.TRACK_POSITION,pos);
 
         startActivity(playbackIntent);
     }
