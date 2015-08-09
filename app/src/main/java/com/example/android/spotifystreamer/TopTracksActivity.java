@@ -38,6 +38,7 @@ TopTracksFragment.TracksToMainCommunicatior{
             fragment.setArguments(args);
 
             getSupportFragmentManager().beginTransaction()
+                    .addToBackStack(null)
                     .replace(R.id.top_tracks_container, fragment, TOPTRACKSFRAGMENT_TAG)
                     .commit();
             Log.d(LOGTAG,"fragment created from toptracks activity");

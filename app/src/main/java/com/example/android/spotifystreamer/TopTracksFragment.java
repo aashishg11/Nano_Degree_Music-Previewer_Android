@@ -251,6 +251,12 @@ String artistName;
     public class FetchTopTracks extends AsyncTask<String, Void, ArrayList<TopTrackInfo>> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            allTracks.clear();
+        }
+
+        @Override
         protected ArrayList<TopTrackInfo> doInBackground(String... params) {
 
             try {
