@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -20,12 +21,31 @@ public class PlaybackService extends Service {
     public static String ACTION_PLAY = "com.example.android.spotifystreamer.PLAY";
     public static String ACTION_PAUSE = "com.example.android.spotifystreamer.PAUSE";
 
+    public static String UPDATE_MAX_POS = "com.example.android.spotifystreamer.UPDATE_MAX_POS";
+    public static String UPDATE_CUR_POS = "com.example.android.spotifystreamer.UPDATE_CUR_POS";
+
+    public static String GET_MAX_POS = "com.example.android.spotifystreamer.GET_MAX_POS";
+    public static String GET_CUR_POS = "com.example.android.spotifystreamer.GET_CUR_POS";
+
+    public static String CHANGE_SEEK = "com.example.android.spotifystreamer.CHANGE_SEEK";
+
     private boolean startPlaying = false;
 
     private MediaPlayer mMediaPlayer = null;
-   // private final Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private Intent intent;
     private BroadcastReceiver receiver;
+
+    private Runnable sendSeekUpdate = new Runnable() {
+        public void run() {
+            if(mMediaPlayer != null) {
+                sendSeekPos();
+                Log.d("PlaybackService","pos sent");
+            }
+            handler.postDelayed(this, 1000);
+        }
+    };
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -39,6 +59,9 @@ public class PlaybackService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_PLAY);
         filter.addAction(ACTION_PAUSE);
+        filter.addAction(GET_CUR_POS);
+        filter.addAction(GET_MAX_POS);
+        filter.addAction(CHANGE_SEEK);
 
         receiver = new BroadcastReceiver() {
             @Override
@@ -46,7 +69,8 @@ public class PlaybackService extends Service {
                 String intentAction = intent.getAction();
 
                 if(intentAction.equals(ACTION_PLAY)){
-                    if(mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
+                    if(mMediaPlayer != null) {
+                        //if(mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
                         mMediaPlayer.start();
                     }
                     else if(mMediaPlayer == null) {
@@ -58,6 +82,18 @@ public class PlaybackService extends Service {
                         mMediaPlayer.pause();
                     }
                 }
+                else if(intentAction.equals(GET_CUR_POS)){
+                    sendSeekPos();
+                }
+                else if(intentAction.equals(GET_MAX_POS)){
+                    sendMaxPos();
+                }
+                else if(intentAction.equals(CHANGE_SEEK)) {
+                    int seek = intent.getIntExtra("seekto", 0);
+                    if(mMediaPlayer != null) {
+                        mMediaPlayer.seekTo(seek);
+                    }
+                }
 
             }
         };
@@ -67,8 +103,8 @@ public class PlaybackService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(intent != null) {
             String url = intent.getStringExtra("previewUrl");
-           // handler.removeCallbacks(sendUpdatesToUI);
-            //handler.postDelayed(sendUpdatesToUI, 200);
+           handler.removeCallbacks(sendSeekUpdate);
+            handler.postDelayed(sendSeekUpdate, 1000);
 
             try {
                 mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -76,7 +112,7 @@ public class PlaybackService extends Service {
                 mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
-                       // sendMax();
+                       sendMaxPos();
                         if(startPlaying)
                             mMediaPlayer.start();
                     }
@@ -92,9 +128,7 @@ public class PlaybackService extends Service {
     }
 
     public void onDestroy() {
-        /* clean up */
-        Log.i("service","destroying service");
-        //handler.removeCallbacks(sendUpdatesToUI);
+        handler.removeCallbacks(sendSeekUpdate);
         if (mMediaPlayer.isPlaying()) {
             mMediaPlayer.stop();
         }
@@ -106,5 +140,21 @@ public class PlaybackService extends Service {
 
     public void onCompletion(MediaPlayer _mediaPlayer) {
         stopSelf();
+    }
+
+    private void sendMaxPos(){
+        if(mMediaPlayer != null) {
+            intent = new Intent(UPDATE_MAX_POS);
+            intent.putExtra("maxPos", mMediaPlayer.getDuration());
+            sendBroadcast(intent);
+        }
+    }
+
+    private void sendSeekPos() {
+        if(mMediaPlayer != null) {
+            intent = new Intent(UPDATE_CUR_POS);
+            intent.putExtra("curPos", mMediaPlayer.getCurrentPosition());
+            sendBroadcast(intent);
+        }
     }
 }
