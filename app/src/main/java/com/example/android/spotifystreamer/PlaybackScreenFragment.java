@@ -1,8 +1,11 @@
 package com.example.android.spotifystreamer;
 
 import android.app.DialogFragment;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,11 @@ public class PlaybackScreenFragment extends DialogFragment {
     String albumName;
     String artistName;
     int trackPosition;
+    IntentFilter filter;
+    private static Intent playbackService = null;
+    private static BroadcastReceiver receiver = null;
+    private boolean isPlaying = false;
+    private static boolean saveState = false;
     static final String SONG_URL = "URL";
     static final String IMAGE_URL = "IMAGE";
     static final String ARTIST_NAME = "NAME";
@@ -122,6 +130,17 @@ public class PlaybackScreenFragment extends DialogFragment {
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        Log.d("playerfragment", "onSaveInstanceState");
+
+        saveState = true;
+        savedInstanceState.putInt("trackIndex", trackPosition);
+        savedInstanceState.putBoolean("playing", isPlaying);
+    }
+
     private void previousSong() {
         trackPosition--;
         if(trackPosition < 0 ){
@@ -131,11 +150,23 @@ public class PlaybackScreenFragment extends DialogFragment {
     }
 
     private void pauseSong() {
-        togglePlayPause();
+        if(isPlaying) {
+            togglePlayPause();
+            isPlaying = false;
+        }
+
+        Intent intent = new Intent();
+        intent.setAction(PlaybackService.ACTION_PAUSE);
+        this.getActivity().sendBroadcast(intent);
     }
 
     private void playSong() {
+        isPlaying = true;
         togglePlayPause();
+
+        Intent intent = new Intent();
+        intent.setAction(PlaybackService.ACTION_PLAY);
+        this.getActivity().sendBroadcast(intent);
     }
 
     private void togglePlayPause() {
@@ -163,11 +194,27 @@ public class PlaybackScreenFragment extends DialogFragment {
         songTX.setText(trackName);
         albumName = TopTracksFragment.allTracks.get(trackPosition).albumName;
         albumTX.setText(albumName);
+        url = TopTracksFragment.allTracks.get(trackPosition).previewUrl;
         image = TopTracksFragment.allTracks.get(trackPosition).imageUrl_large;
         if (!image.equals("")) {
             Picasso.with(getActivity()).load(image).into(imageView);
         }
+        if(!saveState) {
 
+            if (playbackService != null) {
+                //if(receiver != null) {
+                //this.getActivity().unregisterReceiver(receiver);
+                //}
+                this.getActivity().stopService(playbackService);
+            }
+            playbackService = new Intent(this.getActivity(), PlaybackService.class);
+            playbackService.putExtra("previewUrl", url);
+            this.getActivity().startService(playbackService);
+            //this.getActivity().registerReceiver(receiver, filter);
+        }
+        else {
+            saveState = false;
+        }
     }
 
 

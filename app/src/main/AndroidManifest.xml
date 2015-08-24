@@ -42,7 +42,13 @@
 
         <service
             android:name="com.example.android.spotifystreamer.PlaybackService"
-            android:enabled="true" />
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_PLAY"/>
+                <action android:name="android.intent.action.ACTION_PAUSE"/>
+            </intent-filter>
+
+            </service>
 
     </application>
 
