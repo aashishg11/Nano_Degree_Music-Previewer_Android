@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment_artist"
-        android:name="com.example.android.spotifystreamer.ArtistsFragment"
+        android:name="aashishgodambe.android.MusicPreviewer.ArtistsFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"

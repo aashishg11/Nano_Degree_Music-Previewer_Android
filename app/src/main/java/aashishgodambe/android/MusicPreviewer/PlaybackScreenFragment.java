@@ -1,4 +1,4 @@
-package com.example.android.spotifystreamer;
+package aashishgodambe.android.MusicPreviewer;
 
 import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
@@ -304,7 +304,6 @@ if(fromUser){
             playbackService.setAction(PlaybackService.ACTION_PLAY);
             playbackService.putExtra("previewUrl", url);
             this.getActivity().startService(playbackService);
-            this.getActivity().sendBroadcast(playbackService);
 //
         } else {
             saveState = false;

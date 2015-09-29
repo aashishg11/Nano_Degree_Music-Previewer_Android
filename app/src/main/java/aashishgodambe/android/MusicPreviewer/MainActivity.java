@@ -1,4 +1,4 @@
-package com.example.android.spotifystreamer;
+package aashishgodambe.android.MusicPreviewer;
 
 import android.app.FragmentManager;
 import android.content.Intent;

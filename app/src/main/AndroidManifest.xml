@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.spotifystreamer">
+    package="aashishgodambe.android.MusicPreviewer">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
-        android:label="@string/app_name"
+        android:label="Music Previewer"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboard"
-            android:label="@string/app_name"
+            android:label="Music Previewer"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.spotifystreamer.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".PlaybackScreenActivity"
@@ -36,12 +36,12 @@
             android:parentActivityName=".TopTracksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.spotifystreamer.TopTracksActivity" />
+                android:value=".TopTracksActivity" />
 
         </activity>
 
         <service
-            android:name="com.example.android.spotifystreamer.PlaybackService"
+            android:name=".PlaybackService"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_PLAY"/>

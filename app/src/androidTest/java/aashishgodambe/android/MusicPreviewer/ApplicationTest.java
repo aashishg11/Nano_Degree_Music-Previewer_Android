@@ -1,4 +1,4 @@
-package com.example.android.spotifystreamer;
+package aashishgodambe.android.MusicPreviewer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
