@@ -55,6 +55,7 @@ public class PlaybackScreenFragment extends DialogFragment {
     static final String TRACK_POSITION = "TRACK_POSITION";
 
 
+
     public PlaybackScreenFragment() {
     }
 
