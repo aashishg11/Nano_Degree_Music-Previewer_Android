@@ -1,12 +1,12 @@
 package aashishgodambe.android.MusicPreviewer;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class PlaybackScreenActivity extends ActionBarActivity {
+public class PlaybackScreenActivity extends AppCompatActivity {
     static final String SONG_URL = "URL";
     static final String IMAGE_URL = "IMAGE";
     static final String ALBUM_NAME = "ALBUM";

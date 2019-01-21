@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "aashishgodambe.android.musicpreviewer"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -20,12 +20,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile(name:'spotify-web-api-android-0.1.0', ext:'aar')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'  // Uses this to create RESTful Requests
-    compile 'com.squareup.okhttp:okhttp:2.2.0'  // Uses this to create HTTP connections
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation(name: 'spotify-web-api-android-0.1.0', ext: 'aar')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.squareup.retrofit:retrofit:1.9.0'
+    // Uses this to create RESTful Requests
+    implementation 'com.squareup.okhttp:okhttp:2.2.0'
+    // Uses this to create HTTP connections
 }
 repositories {
     mavenCentral()

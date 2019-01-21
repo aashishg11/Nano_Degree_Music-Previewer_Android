@@ -3,13 +3,13 @@ package aashishgodambe.android.MusicPreviewer;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity implements ArtistsFragment.ArtistToMainComm,
+public class MainActivity extends AppCompatActivity implements ArtistsFragment.ArtistToMainComm,
         TopTracksFragment.TracksToMainCommunicatior {
 
 
