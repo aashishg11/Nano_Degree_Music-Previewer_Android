@@ -46,7 +46,6 @@ String artistName;
     public static ArrayList<TopTrackInfo> allTracks = new ArrayList<>();
     ListView listView;
     TracksToMainCommunicatior communicatior;
-    //TopTracksToMainComm topTracksToMainComm;
 
     public TopTracksFragment() {
     }
@@ -73,15 +72,7 @@ String artistName;
         View rootView = inflater.inflate(R.layout.fragment_top_tracks, container, false);
 
         // Get a reference to the listview
-        listView = (ListView) rootView.findViewById(R.id.listview_toptracks);
-
-        // Intent for receiving the artist id.
-//        Intent intent = getActivity().getIntent();
-//        if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
-//            artistId = intent.getStringExtra(intent.EXTRA_TEXT);
-//            Log.v(LOG_TAG, "Id is " + artistId);
-//
-//        }
+        listView = rootView.findViewById(R.id.listview_toptracks);
 
         if (savedInstanceState != null) {
             allTracks = savedInstanceState.getParcelableArrayList(STATE_TOP_TRACKS);
@@ -240,9 +231,9 @@ String artistName;
             ImageView imageView;
 
             ViewHolder(View view) {
-                textViewSong = (TextView) view.findViewById(R.id.textView_top_song);
-                textViewAlbum = (TextView) view.findViewById(R.id.textView_top_album);
-                imageView = (ImageView) view.findViewById(R.id.imageView_top_artist);
+                textViewSong = view.findViewById(R.id.textView_top_song);
+                textViewAlbum = view.findViewById(R.id.textView_top_album);
+                imageView = view.findViewById(R.id.imageView_top_artist);
             }
 
         }

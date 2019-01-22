@@ -58,7 +58,7 @@ public class ArtistsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_artists, container, false);
 
         // Get a reference to the listview
-        listView = (ListView) rootView.findViewById(R.id.listview_artists);
+        listView = rootView.findViewById(R.id.listview_artists);
 
         if (savedInstanceState != null) {
 
@@ -67,7 +67,7 @@ public class ArtistsFragment extends Fragment {
             listView.setAdapter(artistAdapter);
 
         } else {
-            final SearchView searchView = (SearchView) rootView.findViewById(R.id.searchView);
+            final SearchView searchView = rootView.findViewById(R.id.searchView);
 
             searchView.setQueryHint("Enter artist name");
 
@@ -239,9 +239,9 @@ public class ArtistsFragment extends Fragment {
             ImageView imageView;
 
             ViewHolder(View rowView) {
-                textViewName = (TextView) rowView.findViewById(R.id.textview_artist_name);
-                textViewPopularity = (TextView) rowView.findViewById(R.id.textview_pop);
-                imageView = (ImageView) rowView.findViewById(R.id.imageView);
+                textViewName = rowView.findViewById(R.id.textview_artist_name);
+                textViewPopularity = rowView.findViewById(R.id.textview_pop);
+                imageView = rowView.findViewById(R.id.imageView);
             }
 
         }

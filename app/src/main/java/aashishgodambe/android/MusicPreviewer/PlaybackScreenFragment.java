@@ -87,23 +87,22 @@ public class PlaybackScreenFragment extends DialogFragment {
             trackPosition = arguments.getInt(TRACK_POSITION);
         }
 
-        elapsedTimeTX = (TextView) view.findViewById(R.id.elaspedTime);
-        maxTimeTX = (TextView) view.findViewById(R.id.duration);
-        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
-        artistTX = (TextView) view.findViewById(R.id.textview_playback_artist);
+        elapsedTimeTX = view.findViewById(R.id.elaspedTime);
+        maxTimeTX = view.findViewById(R.id.duration);
+        seekBar = view.findViewById(R.id.seekBar);
+        artistTX = view.findViewById(R.id.textview_playback_artist);
         artistTX.setText(artistName);
-        songTX = (TextView) view.findViewById(R.id.textview_playback_song);
+        songTX = view.findViewById(R.id.textview_playback_song);
         trackName = TopTracksFragment.allTracks.get(trackPosition).trackName;
         songTX.setText(trackName);
-        albumTX = (TextView) view.findViewById(R.id.textview_playback_album);
+        albumTX = view.findViewById(R.id.textview_playback_album);
         albumTX.setText(albumName);
-        nextBT = (ImageButton) view.findViewById(R.id.button_next_playback);
-        previousBT = (ImageButton) view.findViewById(R.id.button_previous_playback);
-        playBT = (ImageButton) view.findViewById(R.id.button_play_playback);
-        pauseBT = (ImageButton) view.findViewById(R.id.button_pause_playback);
-        imageView = (ImageView) view.findViewById(R.id.imageview_playback);
+        nextBT = view.findViewById(R.id.button_next_playback);
+        previousBT = view.findViewById(R.id.button_previous_playback);
+        playBT = view.findViewById(R.id.button_play_playback);
+        pauseBT = view.findViewById(R.id.button_pause_playback);
+        imageView = view.findViewById(R.id.imageview_playback);
         if (!image.equals("")) {
-            // imageView = (ImageView) view.findViewById(R.id.imageview_playback);
             Picasso.with(getActivity()).load(image).into(imageView);
         }
 
@@ -296,9 +295,6 @@ if(fromUser){
         if (!saveState) {
 
             if (playbackService != null) {
-                //if(receiver != null) {
-                //this.getActivity().unregisterReceiver(receiver);
-                //}
                 this.getActivity().stopService(playbackService);
             }
             playbackService = new Intent(this.getActivity(), PlaybackService.class);
