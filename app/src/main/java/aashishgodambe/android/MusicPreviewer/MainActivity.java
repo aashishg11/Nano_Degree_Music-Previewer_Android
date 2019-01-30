@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.spotify.sdk.android.authentication.AuthenticationClient;
+import com.spotify.sdk.android.authentication.AuthenticationRequest;
+import com.spotify.sdk.android.authentication.AuthenticationResponse;
+
 
 public class MainActivity extends AppCompatActivity implements ArtistsFragment.ArtistToMainComm,
         TopTracksFragment.TracksToMainCommunicatior {
@@ -15,7 +19,10 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
 
     private static final String TOPTRACKSFRAGMENT_TAG = "TTFTAG";
     private static final String LOGTAG = MainActivity.class.getSimpleName();
-
+    private static final int REQUEST_CODE = 1337;
+    private static final String REDIRECT_URI = "appname://musicpreviewer";
+    private static final String CLIENT_ID = "2753790fd3af434194d2cd974a9c3ca8";
+    private String mAccessToken;
     boolean mtwopane;
     ArtistsFragment af;
     TopTracksFragment ttf;
@@ -26,6 +33,14 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AuthenticationRequest.Builder builder =
+                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+
+        builder.setScopes(new String[]{"streaming"});
+        AuthenticationRequest request = builder.build();
+
+        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
 
         launchArtistFrag();
 
@@ -43,6 +58,34 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
 
         } else {
             mtwopane = false;
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        // Check if result comes from the correct activity
+        if (requestCode == REQUEST_CODE) {
+            AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
+
+            switch (response.getType()) {
+                // Response was successful and contains auth token
+                case TOKEN:
+                    // Handle successful response
+                    Log.d("MainActivity","Token - "+response.getAccessToken());
+                    Utils.setAccessToken(response.getAccessToken());
+                    break;
+
+                // Auth flow returned an error
+                case ERROR:
+                    // Handle error response
+                    Log.d("MainActivity","Error msg - "+response.getError());
+                    break;
+
+                // Most likely auth flow was cancelled
+                default:
+                    // Handle other cases
+            }
         }
     }
 

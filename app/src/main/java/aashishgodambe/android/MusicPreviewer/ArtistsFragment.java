@@ -265,6 +265,7 @@ public class ArtistsFragment extends Fragment {
             ArtistsPager result;
             try {
                 SpotifyApi api = new SpotifyApi();
+                api.setAccessToken(Utils.getAccessToken());
                 SpotifyService spotify = api.getService();
                 result = spotify.searchArtists(params[0]);
 

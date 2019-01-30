@@ -253,6 +253,7 @@ String artistName;
             try {
 
                 SpotifyApi spotifyApi = new SpotifyApi();
+                spotifyApi.setAccessToken(Utils.getAccessToken());
                 SpotifyService spotifyService = spotifyApi.getService();
                 Map<String, Object> options = new HashMap<>();
                 options.put("country", "US");
