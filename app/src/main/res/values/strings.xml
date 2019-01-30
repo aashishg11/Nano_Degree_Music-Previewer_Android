@@ -14,4 +14,9 @@
     <string name="playback_current_time">0:00</string>
     <string name="playback_max_time">4:38</string>
 
+    <resources>
+        <string name="com_spotify_sdk_redirect_scheme">appname</string>
+        <string name="com_spotify_sdk_redirect_host">musicpreviewer</string>
+    </resources>
+
 </resources>

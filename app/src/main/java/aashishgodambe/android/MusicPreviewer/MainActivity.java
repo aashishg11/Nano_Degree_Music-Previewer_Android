@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
 
     private static final String TOPTRACKSFRAGMENT_TAG = "TTFTAG";
     private static final String LOGTAG = MainActivity.class.getSimpleName();
+
     boolean mtwopane;
     ArtistsFragment af;
     TopTracksFragment ttf;
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        launchArtistFrag();
+
+    }
+
+    private void launchArtistFrag(){
         manager = getFragmentManager();
 
         af = (ArtistsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_artist);
@@ -37,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.A
         } else {
             mtwopane = false;
         }
-
     }
 
     @Override

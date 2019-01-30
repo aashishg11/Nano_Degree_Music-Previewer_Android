@@ -40,6 +40,8 @@
 
         </activity>
 
+
+
         <service
             android:name=".PlaybackService"
             android:enabled="true" >
