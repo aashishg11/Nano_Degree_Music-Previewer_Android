@@ -6,4 +6,4 @@ Android app which streams a 30 sec sound clip from spotify web api.
 - Optimized the listview by 175% using ViewHolder design pattern for smooth scrolling.
 - Used Broadcast receiver to exchange information between background service and activity.
 - Used parcelable interface to persist data on orientation changes.
-- Play Store Link : play.google.com/store/apps/details?id=aashishgodambe.android.musicpreviewer
+
